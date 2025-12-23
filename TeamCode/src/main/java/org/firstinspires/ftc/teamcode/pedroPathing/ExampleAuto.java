@@ -15,14 +15,18 @@ public class ExampleAuto extends OpMode {
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
 
+
+
     private int pathState;
-    private final Pose startPose = new Pose(48, 12, Math.toRadians(90)); // Start Pose of our robot.
+    private final Pose startPose = new Pose(56.000, 8.000, Math.toRadians(90));// Start Pose of our robot.
     private final Pose scorePose = new Pose(48, 96, Math.toRadians(135)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
     private final Pose pickup1Pose = new Pose(52, 84, Math.toRadians(180)); // Highest (First Set) of Artifacts from the Spike Mark.
     private final Pose pickup2Pose = new Pose(52, 60, Math.toRadians(180)); // Middle (Second Set) of Artifacts from the Spike Mark.
     private final Pose pickup3Pose = new Pose(52, 36, Math.toRadians(180)); // Lowest (Third Set) of Artifacts from the Spike Mark.
     private Path scorePreload;
     private PathChain grabPickup1, scorePickup1, grabPickup2, scorePickup2, grabPickup3, scorePickup3;
+
+    private Paths paths = null;
 
     public void buildPaths() {
         /* This is our scorePreload path. We are using a BezierLine, which is a straight line. */
@@ -71,7 +75,6 @@ public class ExampleAuto extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
-                follower.followPath(scorePreload);
                 setPathState(1);
                 break;
             case 1:
@@ -87,7 +90,7 @@ public class ExampleAuto extends OpMode {
                     /* Score Preload */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup1,true);
+                    follower.followPath(paths.firstBalls,true);
                     setPathState(2);
                 }
                 break;
@@ -97,7 +100,7 @@ public class ExampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup1,true);
+                    follower.followPath(paths.firstShoot,true);
                     setPathState(3);
                 }
                 break;
@@ -107,7 +110,7 @@ public class ExampleAuto extends OpMode {
                     /* Score Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup2,true);
+                    follower.followPath(paths.secondBalls,true);
                     setPathState(4);
                 }
                 break;
@@ -117,7 +120,7 @@ public class ExampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup2,true);
+                    follower.followPath(paths.secondShoot,true);
                     setPathState(5);
                 }
                 break;
@@ -127,7 +130,7 @@ public class ExampleAuto extends OpMode {
                     /* Score Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
-                    follower.followPath(grabPickup3,true);
+                    follower.followPath(paths.thirdBalls,true);
                     setPathState(6);
                 }
                 break;
@@ -137,7 +140,7 @@ public class ExampleAuto extends OpMode {
                     /* Grab Sample */
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are scoring the sample */
-                    follower.followPath(scorePickup3, true);
+                    follower.followPath(paths.thirdShoot, true);
                     setPathState(7);
                 }
                 break;
@@ -183,6 +186,7 @@ public class ExampleAuto extends OpMode {
         follower = Constants.createFollower(hardwareMap);
         buildPaths();
         follower.setStartingPose(startPose);
+        paths = new Paths(follower);
 
     }
 
