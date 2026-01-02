@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface Features {
     public void init(HardwareMap hardwareMap);
-    public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2);
+    public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException;
 
 }
