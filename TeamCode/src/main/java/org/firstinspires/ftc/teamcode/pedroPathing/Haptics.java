@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Haptics implements Features{
+//    private SensorBNO055IMU imu = null;
     private DistanceSensor sensor = null;
     private Servo led = null;
 
@@ -24,6 +26,7 @@ public class Haptics implements Features{
     public void init(HardwareMap hardwareMap) {
         sensor = hardwareMap.get(DistanceSensor.class, "distance");
         led = hardwareMap.get(Servo.class, "led");
+//        imu = hardwareMap.get(SensorBNO055IMU.class, "imu");
         led.setPosition(0);
 
     }

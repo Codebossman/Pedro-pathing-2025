@@ -51,8 +51,8 @@ public class LaunchPower implements Features{
         if(power >= 1){
             power = 1;
         }
-        if(power <= 0.65 && firstTap){
-            power = 0.65;
+        if(power <= 0.5 && firstTap){
+            power = 0.5;
         }
         eject.setPower(power);
         List <String> telemetryData = new ArrayList<>();

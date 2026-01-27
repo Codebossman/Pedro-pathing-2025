@@ -6,6 +6,8 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU;
+
 import java.util.ArrayList;
 import java.util.List;
 

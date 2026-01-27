@@ -23,7 +23,7 @@ public class Launcher implements Features{
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException {
         if (gamepad2.yWasPressed()) {
-            pos = 0.1;
+            pos = 0.025;
         }
         if(gamepad2.yWasReleased()){
             pos = 0;

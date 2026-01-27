@@ -135,12 +135,14 @@ class LocalizationTest extends OpMode {
         telemetryM.debug("This will print your robot's position to telemetry while "
                 + "allowing robot control through a basic mecanum drive on gamepad 1.");
         telemetryM.update(telemetry);
+
         follower.update();
         drawOnlyCurrent();
     }
 
     @Override
     public void start() {
+        follower.setStartingPose(new Pose(72,72, 0));
         follower.startTeleopDrive();
         follower.update();
     }

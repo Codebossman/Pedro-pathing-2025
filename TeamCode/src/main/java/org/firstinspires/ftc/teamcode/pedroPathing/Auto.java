@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 //import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.telemetryM;
 
 import com.bylazar.configurables.PanelsConfigurables;
+import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.configurables.annotations.IgnoreConfigurable;
 import com.bylazar.telemetry.PanelsTelemetry;
 import com.bylazar.telemetry.TelemetryManager;
@@ -20,6 +21,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import java.util.ArrayList;
 import java.util.List;
 
+@Configurable
 @Autonomous(name = "Auto List", group = "Pedro Pathing")
 public class Auto extends SelectableOpMode {
     public static Follower followers;
@@ -105,8 +107,10 @@ class RedLow extends OpMode {
 
     @Override
     public void init() {
+        paths = new Paths(Auto.followers);
         Auto.followers.update();
         Auto.drawOnlyCurr();
+
     }
 
     @Override
@@ -146,6 +150,7 @@ class RedHigh extends OpMode {
 
     @Override
     public void init() {
+        paths = new Paths(Auto.followers);
         Auto.followers.update();
         Auto.drawOnlyCurr();
     }
@@ -187,13 +192,14 @@ class BlueLow extends OpMode {
 
     @Override
     public void init() {
+        paths = new Paths(Auto.followers);
         Auto.followers.update();
         Auto.drawOnlyCurr();
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the red low auto");
+        Auto.telemetryMan.debug("This is the blue low auto");
 
         Auto.telemetryMan.update(telemetry);
         Auto.followers.update();
@@ -228,13 +234,14 @@ class BlueHigh extends OpMode {
 
     @Override
     public void init() {
+        paths = new Paths(Auto.followers);
         Auto.followers.update();
         Auto.drawOnlyCurr();
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the red low auto");
+        Auto.telemetryMan.debug("This is the blue high auto");
 
         Auto.telemetryMan.update(telemetry);
         Auto.followers.update();

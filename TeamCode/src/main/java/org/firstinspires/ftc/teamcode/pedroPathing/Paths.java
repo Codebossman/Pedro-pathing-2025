@@ -8,10 +8,10 @@ import com.pedropathing.paths.PathChain;
 
 public class Paths {
 
-    public Pose redStartHigh = new Pose(120.000, 120.000);
-    public Pose redStartLow = new Pose(84.000, 12.000);
-    public Pose blueStartHigh = new Pose(24.000, 120.000);
-    public Pose blueStartLow = new Pose(56.000, 8.000);
+    public Pose redStartHigh = new Pose(120.000, 120.000, Math.toDegrees(90));
+    public Pose redStartLow = new Pose(84.000, 12.000, Math.toDegrees(90));
+    public Pose blueStartHigh = new Pose(24.000, 120.000, Math.toDegrees(90));
+    public Pose blueStartLow = new Pose(56.000, 8.000, Math.toDegrees(90));
 
     public PathChain firstBalls;
     public PathChain firstShoot;
@@ -28,7 +28,7 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(56.000, 8.000),
+                                blueStartLow,
                                 new Pose(59.000, 39.000),
                                 new Pose(41.000, 36.000)
                         )
@@ -40,7 +40,7 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(24.000, 120.000),
+                                blueStartHigh,
                                 new Pose(45.800, 106.000),
                                 new Pose(44.000, 84.000)
                         )
@@ -50,14 +50,14 @@ public class Paths {
         redLow = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(84.000, 12.000), new Pose(84.000, 48.000))
+                        new BezierLine(redStartLow, new Pose(84.000, 48.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(0))
                 .build();
         redHigh = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(120.000, 120.000), new Pose(82.000, 120.000))
+                        new BezierLine(redStartHigh,  new Pose(82.000, 120.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(270))
                 .build();
