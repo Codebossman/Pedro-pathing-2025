@@ -31,8 +31,11 @@ public class BaselineOpMode extends LinearOpMode {
         featureList.add(new LaunchPower());
         featureList.add(new KickBall());
         featureList.add(new MotorDrive());
-//        featureList.add(new TurnSensor());
-//        featureList.add(new GoTo());
+        featureList.add(new Haptics());
+        featureList.add(new ServoEncoder());
+   //     featureList.add(new MagneticSensor());
+     //   featureList.add(new TurnSensor());
+     //   featureList.add(new GoTo());
 //        featureList.add(new Drive());
         for (Features feature: featureList){
             feature.init(hardwareMap);

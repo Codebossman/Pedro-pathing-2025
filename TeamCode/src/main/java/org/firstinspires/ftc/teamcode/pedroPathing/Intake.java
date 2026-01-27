@@ -26,7 +26,9 @@ public class Intake implements Features {
     DcMotor intake = null;
 
     double speed = 0;
-    double cap = 100;
+    double cap = 1;
+
+    boolean isOn = false;
 
     public void init(HardwareMap hardwareMap) {
         intake = hardwareMap.get(DcMotor.class, "intake");
@@ -37,17 +39,22 @@ public class Intake implements Features {
 
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) {
-        if (gamepad1.dpadDownWasPressed()) {
-            speed -= 1;
+        if(gamepad2.aWasPressed()){
+            isOn = !isOn;
         }
-        if (gamepad1.dpadUpWasPressed()) {
-            speed += 1;
+        if(isOn){
+            speed = 1;
+        }else{
+            speed = 0;
         }
         if (speed >= cap) {
             speed = cap;
         }
         if (speed <= 0) {
             speed = 0;
+        }
+        if(gamepad1.a){
+            speed = -1;
         }
         intake.setPower(speed);
 

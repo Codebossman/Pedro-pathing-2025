@@ -22,12 +22,16 @@ public class Launcher implements Features{
 
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException {
-        if (gamepad1.y) {
-            pos = 0.03;
-        }else{
+        if (gamepad2.yWasPressed()) {
+            pos = 0.1;
+        }
+        if(gamepad2.yWasReleased()){
             pos = 0;
         }
         launch.setPosition(pos);
+//        if(pos >= 0.04){
+//            pos = 0;
+//        }
 
         return Collections.emptyList();
     }
