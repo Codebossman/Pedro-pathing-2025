@@ -18,6 +18,8 @@ import com.pedropathing.util.PoseHistory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.ftccommon.internal.manualcontrol.commands.MotorCommands;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,6 +217,48 @@ class BlueLow extends OpMode {
     }
 }
 class BlueHigh extends OpMode {
+    static Paths paths;
+    private PathChain blueHigh;
+
+    /**
+     * This runs the OpMode, updating the Follower as well as printing out the debug statements to
+     * the Telemetry, as well as the Panels.
+     */
+    @Override
+    public void loop() {
+        Auto.followers.update();
+        Auto.draw();
+
+        if (Auto.followers.atParametricEnd()) {
+            Auto.followers.followPath(blueHigh, true);
+        }
+    }
+
+    @Override
+    public void init() {
+        paths = new Paths(Auto.followers);
+        Auto.followers.update();
+        Auto.drawOnlyCurr();
+    }
+
+    @Override
+    public void init_loop() {
+        Auto.telemetryMan.debug("This is the blue high auto");
+
+        Auto.telemetryMan.update(telemetry);
+        Auto.followers.update();
+        Auto.drawOnlyCurr();
+    }
+
+    @Override
+    public void start() {
+        Auto.followers.setStartingPose(paths.blueStartHigh);
+
+        blueHigh = paths.redLow;
+        Auto.followers.followPath(blueHigh);
+    }
+}
+class Shooting extends OpMode{
     static Paths paths;
     private PathChain blueHigh;
 
