@@ -6,8 +6,6 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class BaselineOpMode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         featureList = new ArrayList<>();
         featureList.add(new Intake());
-        featureList.add(new Launcher());
+        featureList.add(new Lift());
         featureList.add(new TurnTable());
         featureList.add(new LaunchPower());
         featureList.add(new KickBall());
@@ -39,9 +37,12 @@ public class BaselineOpMode extends LinearOpMode {
      //   featureList.add(new TurnSensor());
      //   featureList.add(new GoTo());
 //        featureList.add(new Drive());
-        for (Features feature: featureList){
-            feature.init(hardwareMap);
-        }
+
+        featureList.forEach(featureList -> featureList.init(hardwareMap));
+//
+//        for (Features feature: featureList){
+//            feature.init(hardwareMap);
+//        }
 
         waitForStart();
         while (opModeIsActive()) {

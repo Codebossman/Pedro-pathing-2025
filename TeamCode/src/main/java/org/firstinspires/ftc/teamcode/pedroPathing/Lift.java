@@ -7,9 +7,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 import java.util.Collections;
 import java.util.List;
 
-public class Launcher implements Features{
+public class Lift implements Features{
     private Servo launch = null;
     double pos;
+    double LIFT = 0.03;
+    double OFF = 0;
     long runTime = System.currentTimeMillis();
 
 
@@ -20,13 +22,14 @@ public class Launcher implements Features{
         launch.setDirection(Servo.Direction.REVERSE);
     }
 
+
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException {
         if (gamepad2.yWasPressed()) {
-            pos = 0.025;
+            pos = LIFT;
         }
         if(gamepad2.yWasReleased()){
-            pos = 0;
+            pos = OFF;
         }
         launch.setPosition(pos);
 //        if(pos >= 0.04){
@@ -41,5 +44,19 @@ public class Launcher implements Features{
         while(runTime >= (timeElasped+ms)){
 
         }
+    }
+    public double getPos(){
+        return pos;
+    }
+    public void setPos(double newPos){
+        this.pos = newPos;
+    }
+
+    public double getLIFT() {
+        return LIFT;
+    }
+
+    public double getOFF() {
+        return OFF;
     }
 }

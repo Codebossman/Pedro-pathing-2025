@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedroPathing; // make sure this aligns with class location
+package org.firstinspires.ftc.teamcode.pedroPathing.Auto; // make sure this aligns with class location
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
@@ -9,8 +9,18 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-@Autonomous(name = "Universal 2-foot auto", group = "Examples")
-public class ExampleAuto extends OpMode {
+import org.firstinspires.ftc.teamcode.pedroPathing.AutoCommands;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.pedroPathing.Haptics;
+import org.firstinspires.ftc.teamcode.pedroPathing.Intake;
+import org.firstinspires.ftc.teamcode.pedroPathing.KickBall;
+import org.firstinspires.ftc.teamcode.pedroPathing.LaunchPower;
+import org.firstinspires.ftc.teamcode.pedroPathing.Lift;
+import org.firstinspires.ftc.teamcode.pedroPathing.ServoEncoder;
+import org.firstinspires.ftc.teamcode.pedroPathing.TurnTable;
+
+@Autonomous(name = "Blue high auto", group = "Examples")
+public class BlueHighAuto extends OpMode {
 
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;
@@ -18,14 +28,23 @@ public class ExampleAuto extends OpMode {
 
 
     private int pathState;
-    private final Pose startPose = new Pose(48, 12, Math.toRadians(90)); // Start Pose of our robot.
-    private final Pose endPose = new Pose(48, 36, Math.toRadians(135)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
+    private final Pose startPose = new Pose(25, 130, Math.toRadians(323)); // Start Pose of our robot.
+    private final Pose endPose = new Pose(48, 132, Math.toRadians(135)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
     private final Pose scorePose = new Pose(48, 96, Math.toRadians(135)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
     private final Pose pickup1Pose = new Pose(52, 84, Math.toRadians(180)); // Highest (First Set) of Artifacts from the Spike Mark.
     private final Pose pickup2Pose = new Pose(52, 60, Math.toRadians(180)); // Middle (Second Set) of Artifacts from the Spike Mark.
     private final Pose pickup3Pose = new Pose(52, 36, Math.toRadians(180)); // Lowest (Third Set) of Artifacts from the Spike Mark.
     private Path scorePreload;
     private PathChain grabPickup1, scorePickup1, grabPickup2, scorePickup2, grabPickup3, scorePickup3, endChain;
+    private TurnTable turnTable;
+    private Lift lift;
+    private LaunchPower launcher;
+    private Intake intake;
+    private KickBall kicker;
+    private Haptics haptics;
+    private ServoEncoder encoder;
+
+    private AutoCommands command;
     public void buildPaths() {
         /* This is our scorePreload path. We are using a BezierLine, which is a straight line. */
         scorePreload = new Path(new BezierLine(startPose, scorePose));
@@ -78,7 +97,11 @@ public class ExampleAuto extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
+                telemetry.addLine("shooting");
+                telemetry.update();
+                command.shoot(3, telemetry);
                 setPathState(8);
+
                 break;
             case 1:
 
@@ -208,6 +231,24 @@ public class ExampleAuto extends OpMode {
         follower.setStartingPose(startPose);
 //        paths = new Paths(follower);
 
+        turnTable = new TurnTable();
+        lift = new Lift();
+        launcher = new LaunchPower();
+        intake = new Intake();
+        kicker = new KickBall();
+        haptics = new Haptics();
+        encoder = new ServoEncoder();
+
+        turnTable.init(hardwareMap);
+        lift.init(hardwareMap);
+        launcher.init(hardwareMap);
+        intake.init(hardwareMap);
+        kicker.init(hardwareMap);
+        haptics.init(hardwareMap);
+        encoder.init(hardwareMap);
+
+
+        command = new AutoCommands(turnTable, lift, launcher, intake, kicker, haptics, encoder);
     }
 
     /** This method is called continuously after Init while waiting for "play". **/

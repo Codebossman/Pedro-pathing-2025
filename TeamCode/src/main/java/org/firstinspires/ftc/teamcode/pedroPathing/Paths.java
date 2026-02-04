@@ -8,10 +8,10 @@ import com.pedropathing.paths.PathChain;
 
 public class Paths {
 
-    public Pose redStartHigh = new Pose(120.000, 120.000, Math.toDegrees(90));
-    public Pose redStartLow = new Pose(84.000, 12.000, Math.toDegrees(90));
-    public Pose blueStartHigh = new Pose(24.000, 120.000, Math.toDegrees(90));
-    public Pose blueStartLow = new Pose(56.000, 8.000, Math.toDegrees(90));
+    public Pose redStartHigh = new Pose(120.000, 120.000, Math.toRadians(90));
+    public Pose redStartLow = new Pose(84.000, 12.000, Math.toRadians(90));
+    public Pose blueStartHigh = new Pose(24.000, 120.000, Math.toRadians(90));
+    public Pose blueStartLow = new Pose(48.000, 8.000, Math.toRadians(90));
 
     public PathChain firstBalls;
     public PathChain firstShoot;
@@ -27,11 +27,7 @@ public class Paths {
         blueLow = follower
                 .pathBuilder()
                 .addPath(
-                        new BezierCurve(
-                                blueStartLow,
-                                new Pose(59.000, 39.000),
-                                new Pose(41.000, 36.000)
-                        )
+                        new BezierLine(blueStartLow, new Pose(48.000, 36.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
                 .build();
@@ -65,7 +61,7 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(56.000, 8.000),
+                                new Pose(56, 8),
                                 new Pose(65.000, 36.000),
                                 new Pose(22.000, 36.000)
                         )
@@ -89,7 +85,7 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(34.000, 108.000),
+                                follower.getPose(),
                                 new Pose(65.000, 55.000),
                                 new Pose(22.000, 60.000)
                         )
@@ -113,7 +109,7 @@ public class Paths {
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(34.000, 108.000),
+                                follower.getPose(),
                                 new Pose(56.000, 78.000),
                                 new Pose(22.000, 84.000)
                         )

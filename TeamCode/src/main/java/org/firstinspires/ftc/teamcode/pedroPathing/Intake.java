@@ -47,12 +47,7 @@ public class Intake implements Features {
         }else{
             speed = 0;
         }
-        if (speed >= cap) {
-            speed = cap;
-        }
-        if (speed <= 0) {
-            speed = 0;
-        }
+
         if(gamepad1.a){
             speed = -1;
         }
@@ -60,5 +55,12 @@ public class Intake implements Features {
 
         return Collections.emptyList();
     }
+    public double getPower(){
+        return speed;
+    }
+    public void setPower(double power){
+        this.speed = power;
+    }
+
 
 }

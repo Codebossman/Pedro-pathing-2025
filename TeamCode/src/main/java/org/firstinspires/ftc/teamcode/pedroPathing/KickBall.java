@@ -29,4 +29,10 @@ public class KickBall implements Features{
         telemetryData.add(String.format(Locale.ENGLISH, "Kick: %4.2f", kick));
         return telemetryData;
     }
+    public double getPos(){
+        return kick;
+    }
+    public void setPos(double newPos){
+        this.kick = newPos;
+    }
 }

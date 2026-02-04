@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 public class ServoEncoder implements Features{
     private DcMotor encoder = null;
     double encoderPos;
+    double RIGHTANGLE = 2000;
     @Override
     public void init(HardwareMap hardwareMap) {
         encoder = hardwareMap.get(DcMotor.class, "encoder");
@@ -25,5 +25,14 @@ public class ServoEncoder implements Features{
         List <String> telemetryData = new ArrayList<>();
         telemetryData.add("Encoder: " + encoderPos);
         return telemetryData;
+    }
+    public double getEncoderPos(){
+        return encoderPos;
+    }
+    public double getRIGHTANGLE(){
+        return RIGHTANGLE;
+    }
+    public void setEncoderPos(double newPos){
+        this.encoderPos = newPos;
     }
 }

@@ -18,14 +18,12 @@ import com.pedropathing.util.PoseHistory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.ftccommon.internal.manualcontrol.commands.MotorCommands;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Configurable
-@Autonomous(name = "Auto List", group = "Pedro Pathing")
-public class Auto extends SelectableOpMode {
+//@Autonomous(name = "Auto List", group = "Pedro Pathing")
+public class Autos extends SelectableOpMode {
     public static Follower followers;
 
 
@@ -39,7 +37,7 @@ public class Auto extends SelectableOpMode {
     @IgnoreConfigurable
     static ArrayList<String> changes = new ArrayList<>();
 
-    public Auto() {
+    public Autos() {
         super("Select a Tuning OpMode", s -> {
             s.folder("All Autos", l -> {
                 l.add("Low Red", RedLow::new);
@@ -99,37 +97,37 @@ class RedLow extends OpMode {
      */
     @Override
     public void loop() {
-        Auto.followers.update();
-        Auto.draw();
+        Autos.followers.update();
+        Autos.draw();
 
-        if (Auto.followers.atParametricEnd()) {
-            Auto.followers.followPath(redLow, true);
+        if (Autos.followers.atParametricEnd()) {
+            Autos.followers.followPath(redLow, true);
         }
     }
 
     @Override
     public void init() {
-        paths = new Paths(Auto.followers);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        paths = new Paths(Autos.followers);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
 
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the red low auto");
+        Autos.telemetryMan.debug("This is the red low auto");
 
-        Auto.telemetryMan.update(telemetry);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        Autos.telemetryMan.update(telemetry);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void start() {
-        Auto.followers.setStartingPose(paths.redStartLow);
+        Autos.followers.setStartingPose(paths.redStartLow);
 
         redLow = paths.redLow;
-        Auto.followers.followPath(redLow);
+        Autos.followers.followPath(redLow);
     }
 }
 class RedHigh extends OpMode {
@@ -142,36 +140,36 @@ class RedHigh extends OpMode {
      */
     @Override
     public void loop() {
-        Auto.followers.update();
-        Auto.draw();
+        Autos.followers.update();
+        Autos.draw();
 
-        if (Auto.followers.atParametricEnd()) {
-            Auto.followers.followPath(redHigh, true);
+        if (Autos.followers.atParametricEnd()) {
+            Autos.followers.followPath(redHigh, true);
         }
     }
 
     @Override
     public void init() {
-        paths = new Paths(Auto.followers);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        paths = new Paths(Autos.followers);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the red high auto");
+        Autos.telemetryMan.debug("This is the red high auto");
 
-        Auto.telemetryMan.update(telemetry);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        Autos.telemetryMan.update(telemetry);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void start() {
-        Auto.followers.setStartingPose(paths.redStartHigh);
+        Autos.followers.setStartingPose(paths.redStartHigh);
 
         redHigh = paths.redLow;
-        Auto.followers.followPath(redHigh);
+        Autos.followers.followPath(redHigh);
     }
 }
 class BlueLow extends OpMode {
@@ -184,36 +182,36 @@ class BlueLow extends OpMode {
      */
     @Override
     public void loop() {
-        Auto.followers.update();
-        Auto.draw();
+        Autos.followers.update();
+        Autos.draw();
 
-        if (Auto.followers.atParametricEnd()) {
-            Auto.followers.followPath(blueLow, true);
+        if (Autos.followers.atParametricEnd()) {
+            Autos.followers.followPath(blueLow, true);
         }
     }
 
     @Override
     public void init() {
-        paths = new Paths(Auto.followers);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        paths = new Paths(Autos.followers);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the blue low auto");
+        Autos.telemetryMan.debug("This is the blue low auto");
 
-        Auto.telemetryMan.update(telemetry);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        Autos.telemetryMan.update(telemetry);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void start() {
-        Auto.followers.setStartingPose(paths.blueStartLow);
+        Autos.followers.setStartingPose(paths.blueStartLow);
 
         blueLow = paths.redLow;
-        Auto.followers.followPath(blueLow);
+        Autos.followers.followPath(blueLow);
     }
 }
 class BlueHigh extends OpMode {
@@ -226,77 +224,35 @@ class BlueHigh extends OpMode {
      */
     @Override
     public void loop() {
-        Auto.followers.update();
-        Auto.draw();
+        Autos.followers.update();
+        Autos.draw();
 
-        if (Auto.followers.atParametricEnd()) {
-            Auto.followers.followPath(blueHigh, true);
+        if (Autos.followers.atParametricEnd()) {
+            Autos.followers.followPath(blueHigh, true);
         }
     }
 
     @Override
     public void init() {
-        paths = new Paths(Auto.followers);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        paths = new Paths(Autos.followers);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void init_loop() {
-        Auto.telemetryMan.debug("This is the blue high auto");
+        Autos.telemetryMan.debug("This is the blue high auto");
 
-        Auto.telemetryMan.update(telemetry);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
+        Autos.telemetryMan.update(telemetry);
+        Autos.followers.update();
+        Autos.drawOnlyCurr();
     }
 
     @Override
     public void start() {
-        Auto.followers.setStartingPose(paths.blueStartHigh);
+        Autos.followers.setStartingPose(paths.blueStartHigh);
 
         blueHigh = paths.redLow;
-        Auto.followers.followPath(blueHigh);
-    }
-}
-class Shooting extends OpMode{
-    static Paths paths;
-    private PathChain blueHigh;
-
-    /**
-     * This runs the OpMode, updating the Follower as well as printing out the debug statements to
-     * the Telemetry, as well as the Panels.
-     */
-    @Override
-    public void loop() {
-        Auto.followers.update();
-        Auto.draw();
-
-        if (Auto.followers.atParametricEnd()) {
-            Auto.followers.followPath(blueHigh, true);
-        }
-    }
-
-    @Override
-    public void init() {
-        paths = new Paths(Auto.followers);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
-    }
-
-    @Override
-    public void init_loop() {
-        Auto.telemetryMan.debug("This is the blue high auto");
-
-        Auto.telemetryMan.update(telemetry);
-        Auto.followers.update();
-        Auto.drawOnlyCurr();
-    }
-
-    @Override
-    public void start() {
-        Auto.followers.setStartingPose(paths.blueStartHigh);
-
-        blueHigh = paths.redLow;
-        Auto.followers.followPath(blueHigh);
+        Autos.followers.followPath(blueHigh);
     }
 }

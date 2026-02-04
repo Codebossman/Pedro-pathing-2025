@@ -25,27 +25,46 @@ public class LaunchPower implements Features{
 
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException {
-        if(!firstTap){
-            if(gamepad2.rightBumperWasPressed()){
-                power = 0.65;
-                firstTap = true;
 
-            }
-        }
-        if(firstTap) {
-            if (gamepad2.rightBumperWasPressed()) {
-                power += 0.05;
-            }
-            if (gamepad2.leftBumperWasPressed()) {
-                power -= 0.05;
-            }
-            if (gamepad2.dpadDownWasPressed()) {
-                power = 0;
-                firstTap = false;
-                isOff = true;
-            }
+        if(gamepad2.dpadLeftWasPressed()){
+            power = 0.55;
+            firstTap = true;
         }
 
+
+        if (gamepad2.dpadUpWasPressed()) {
+            power += 0.05;
+        }
+        if (gamepad2.dpadDownWasPressed()) {
+            power -= 0.05;
+        }
+        if (gamepad2.dpadRightWasPressed()) {
+            power = 0;
+            firstTap = false;
+            isOff = true;
+        }
+
+
+
+
+        if(gamepad2.dpadLeftWasPressed()){
+            power = 0.55;
+            firstTap = true;
+        }
+
+//        if(firstTap) {
+//            if (gamepad2.dpadUpWasPressed()) {
+//                power += 0.05;
+//            }
+//            if (gamepad2.dpadDownWasPressed()) {
+//                power -= 0.05;
+//            }
+//            if (gamepad2.dpadRightWasPressed()) {
+//                power = 0;
+//                firstTap = false;
+//                isOff = true;
+//            }
+//        }
         // capping
 
         if(power >= 1){
@@ -62,5 +81,11 @@ public class LaunchPower implements Features{
         return telemetryData;
 
 //        return Collections.emptyList();
+    }
+    public double getPower(){
+        return power;
+    }
+    public void setPower(double speed){
+        this.power = speed;
     }
 }

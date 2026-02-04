@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class TurnTable implements Features{
-    public static final double POWER = 0.2;
+    public final double POWER = 0.2;
     private CRServo turnTable;
     public double pos;
     public boolean isOn;
@@ -39,6 +39,7 @@ public class TurnTable implements Features{
     public void init(HardwareMap hardwareMap) {
         turnTable = hardwareMap.get(CRServo.class, "turn");
         encoder.init(hardwareMap);
+        encoder.setEncoderPos(0);
 //        colorRangeSensor = hardwareMap.get(ColorRangeSensor.class, "sensor");
         power = 0;
         ticks = 0;
@@ -49,36 +50,15 @@ public class TurnTable implements Features{
 
     @Override
     public List<String> driveLoop(Gamepad gamepad1, Gamepad gamepad2) throws InterruptedException {
-//        encoder.driveLoop(gamepad1,gamepad2);
-//        deltaTime = runtime.time();
-//
-//
-//        if(gamepad2.dpadRightWasPressed()){
-//            ticks = encoder.encoderPos *-1; // Encoder is inverted, *-1 makes it positive
-//            tickFlag = true;
-//            power = 0.1;
-//        }
-//        if(gamepad1.dpad_left){
-//            power = -0.1;
-//        }
-//
-//        if( tickFlag && (encoder.encoderPos *-1) >= ticks+rightAngle){
-//            tickFlag = false;
-//            power = 0;
-//        }
-//
+        ticks = encoder.encoderPos;
 
 
-//        distance = colorRangeSensor.getDistance(DistanceUnit.INCH);
-
-
-
-        if(gamepad2.dpad_right){
+        if(gamepad2.right_bumper){
             power = POWER;
         }else{
             power = 0;
         }
-        if(gamepad2.dpad_left){
+        if(gamepad2.left_bumper){
             power = -1*POWER;
         }
 
@@ -117,5 +97,17 @@ public class TurnTable implements Features{
 //        telemetryData.add(String.format(Locale.ENGLISH, "Time plus Delay: %4.2f", (time + delay)));
 
         return telemetryData;
+    }
+    public double getPos(){
+        return power;
+    }
+    public double getPOWER(){
+        return POWER;
+    }
+    public double getTicks(){
+        return ticks;
+    }
+    public void setPos(double newPos){
+        this.power = newPos;
     }
 }
