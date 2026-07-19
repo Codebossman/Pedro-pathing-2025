@@ -22,17 +22,20 @@ public class BaselineOpMode extends LinearOpMode {
     private GoTo goTo;
     private Intake intake;
     public List<Features> featureList = null;
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         featureList = new ArrayList<>();
-        featureList.add(new Intake());
-        featureList.add(new Lift());
-        featureList.add(new TurnTable());
-        featureList.add(new LaunchPower());
-        featureList.add(new KickBall());
+// testing
+//        featureList.add(new Intake());
+//        featureList.add(new Lift());
+//        featureList.add(new TurnTable());
+//        featureList.add(new LaunchPower());
+//        featureList.add(new KickBall());
         featureList.add(new MotorDrive());
-        featureList.add(new Haptics());
-        featureList.add(new ServoEncoder());
+//        featureList.add(new Haptics());
+//        featureList.add(new ServoEncoder());
    //     featureList.add(new MagneticSensor());
      //   featureList.add(new TurnSensor());
      //   featureList.add(new GoTo());
